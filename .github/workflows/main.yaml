@@ -7,7 +7,8 @@ on:
 
 jobs:
   Echo:
-  name: Executing Echo
-  runs-on: ubuntu-latest
-  steps:
-    run: echo "Hello"
+    name: Executing Echo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Hello
+        run: echo "Hello"
