@@ -8,7 +8,9 @@ COPY . /chatapp
 
 RUN pip install -r requirements.txt
 
-ENV FLASK_APP=app.py
+ENV AWS_ACCESS_KEY=""
+ENV AWS_SECRET_KEY=""
+ENV S3_BUCKET=""
 
 EXPOSE 5000
 
