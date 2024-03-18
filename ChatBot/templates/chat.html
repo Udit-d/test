@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    <h1>Welcome, {{ user }}!</h1>
+    <div id="chat-box">
+        {% for message in get_flashed_messages() %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+        {% if bot_response %}
+            <p class="message bot">{{ bot_response }}</p>
+        {% endif %}
+    </div>
+    <form method="post">
+        <input type="text" name="user_message" placeholder="Type your message here..." required>
+        <button type="submit">Send</button>
+    </form>
+    <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        function triggerFileInput() {
+            document.getElementById('fileInput').click();
+        }
+        
+        function displayFileName() {
+            var fileName = document.getElementById('fileInput').value.split('\\').pop();
+            alert('Selected file: ' + fileName);
+        }
+    </script>
+    
+    
+
+<form action="{{ url_for('logout') }}" method="post">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-top: 16px;
+            font-size: 14px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="login-form" method="post">
+        <h2>Login</h2>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+        
+        <div class="message">
+            {% if error %}
+                {{ error }}
+            {% endif %}
+        </div>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-auth.js"></script>
+    <script>
+        // Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAlbv1kT3_HlTU8Z55JX4o6BZt-amXaE6E",
+            authDomain: "chatbot-42205.firebaseapp.com",
+            projectId: "chatbot-42205",
+            storageBucket: "chatbot-42205.appspot.com",
+            messagingSenderId: "663825317294",
+            appId: "1:663825317294:web:46038722e7af28a31b1c3f",
+            measurementId: "G-J03MBEYSZL"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Firebase login function
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Redirect to home with the ID token as a query parameter
+                    window.location.href = '/home?id_token=' + userCredential.user.getIdToken();
+                })
+                .catch((error) => {
+                    console.error(error.message);
+                    // Display error message on the form
+                    document.querySelector('.message').textContent = 'Invalid email or password';
+                });
+        });
+    </script>
+</body>
+</html>
