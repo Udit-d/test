@@ -14,8 +14,7 @@ jobs:
         
       - name: Update 
         run: |
-          apt update -y
-          apt install docker.io -y
+          sudo apt update -y && sudo apt install docker.io -y
           
       - name: Build Docker image
         run: docker build . -t my-flask-app
