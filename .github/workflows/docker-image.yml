@@ -16,6 +16,9 @@ jobs:
         run: |
           ls
           sudo apt update -y && sudo apt install docker.io -y
+          sudo docker kill flaskapp || true
+          sudo docker rm -f flask-app || true
+          
           
       - name: Build Docker image
         run: sudo docker build -f ChatBot/Dockerfile -t my-flask-app ChatBot
