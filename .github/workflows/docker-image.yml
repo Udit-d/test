@@ -18,11 +18,11 @@ jobs:
           sudo apt update -y && sudo apt install docker.io -y
           
       - name: Build Docker image
-        run: docker build -f ChatBot/Dockerfile -t my-flask-app .
+        run: sudo docker build -f ChatBot/Dockerfile -t my-flask-app .
 
       - name: Run Docker container
         run: |
-          docker run -d --name flask-app -p 5000:5000 \
+          sudo docker run -d --name flask-app -p 5000:5000 \
           -e AWS_ACCESS_KEY="${{ secrets.AWS_ACCESS_KEY }}" \
           -e AWS_SECRET_KEY="${{ secrets.AWS_SECRET_KEY }}" \
           -e S3_BUCKET="${{ secrets.S3_BUCKET }}" \
