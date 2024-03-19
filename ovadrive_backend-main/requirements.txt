@@ -1,0 +1,10 @@
+numpy
+openai==0.28.1
+flask
+chromadb
+dill
+pytz
+boto3
+Watchtower
+
+-e .
